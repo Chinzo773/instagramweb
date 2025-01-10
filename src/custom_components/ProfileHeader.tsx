@@ -22,21 +22,22 @@ type postType = {
 
  type userType = {
     username: string;
+    profileImg: string;
     followers: followerType[];
     following: followerType[];
     posts: postType[]
  }
 
 const ProfileHeader = ({user}: {user: userType} ) => {
-    
+    console.log(user.profileImg)
     return(
         <div>
             <div className="p-4">
                 {user.username}
             </div>
             <div className="p-4 flex justify-between">
-                <div className="w-8">
-                    <img src="https://i.pinimg.com/736x/10/26/73/1026734a49e1a7bdbbec411c861a69ab.jpg" className="w-10 rounded-full" width="80px"/>                
+                <div>
+                    <img src={user.profileImg || "https://i.pinimg.com/736x/10/26/73/1026734a49e1a7bdbbec411c861a69ab.jpg"} className="rounded-full" style={{width: '100px'}}/>                
                 </div>
                 <div className="flex items-center gap-4 p-4" >
                     <div>

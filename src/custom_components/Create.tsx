@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
+import { DialogClose } from "@/components/ui/dialog"
 import { jwtDecode } from "jwt-decode"
 
 type jwtType = {                                                                                     
@@ -37,9 +38,10 @@ const Create = ({ postImg, caption }: { postImg:string, caption:string }) => {
     }
 
     return(
-        <Button onClick={() => postCreation()}>
-            Create
-        </Button>
+        <DialogClose className="p-4
+        " onClick={() => postCreation()}>
+            Create            
+        </DialogClose>
     )
 }
 

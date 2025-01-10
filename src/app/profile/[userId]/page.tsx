@@ -24,6 +24,7 @@ type followerType = {
 
  type userType = {
     username: string;
+    profileImg: string;
     followers: followerType[];
     following: followerType[];
     posts: containPost[]
@@ -37,11 +38,11 @@ type followerType = {
 const Page = ({ params }: { params: Promise<{ postId: string }> }) => {
     const [user, setUser] = useState<userType>({
         username: '',
+        profileImg: '',
         followers: [],
         following: [],
         posts: []
       });
-
     const {userId} = useParams()
 
     const getUser = async() => {

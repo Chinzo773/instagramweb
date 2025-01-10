@@ -12,6 +12,7 @@ export default function Page() {
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const [warning, setWarning] = useState<string>('')
 
 
     const goTo = () => {
@@ -21,7 +22,7 @@ export default function Page() {
     const login = async() => {
         let token 
 
-        if (!email || !password) return
+        if (!email || !password) return setWarning('Please fill all the area')
 
         try{
             await fetch(
@@ -39,11 +40,17 @@ export default function Page() {
                         console.error('Error:', error);
                     })
                     .then(response => {
-                        token = response;
-                        console.log(token)
-                        localStorage.setItem("authorization", "Bearer " + token);
+                        if (response == 'Password invalid'){
+                            setWarning('Password Invalid')
+                        }else if(response.message == "User not found"){
+                            setWarning("User doesn't exist")
+                        }else{
+                            token = response;
+                            console.log(token)
+                            localStorage.setItem("authorization", "Bearer " + token);
+                            router.push('/posts')
+                        }
                 })
-            router.push('/posts')
 
         
         }catch(err){
@@ -68,7 +75,7 @@ export default function Page() {
                         <Input placeholder='Email' className='border-solid border-gray-500 rounded' onChange={(e) => setEmail(e.target.value)}/>
                         </div>
                         <div>
-                        <Input placeholder='Password' className='border-solid border-gray-500 rounded' onChange={(e) => setPassword(e.target.value)}/>
+                        <Input type='password' placeholder='Password' className='border-solid border-gray-500 rounded' onChange={(e) => setPassword(e.target.value)}/>
                         </div>
                     </div>
 
@@ -76,6 +83,9 @@ export default function Page() {
                         <Button className="bg-blue-800 text-white w-[100%] rounded" onClick={() => login()}>
                             Log in
                         </Button>
+                        <div className='flex items-center justfiy-center text-red-500 p-4' style={{justifyContent: 'center'}}>
+                            {warning}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -38,7 +38,7 @@ const ProfilePosts = ({user} : {user:userType}) => {
                 {user.posts?.map((post) => {
                     return(
                         <div key={post._id} style={{width: '33%'}}>
-                            <img src={post.postImg} style={{width: '100%', height: '100px'}}/>
+                            <img src={post.postImg} style={{width: '100%', height: '100%'}}/>
                         </div>
                     )
                 })}

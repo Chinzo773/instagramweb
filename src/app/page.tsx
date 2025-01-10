@@ -11,13 +11,11 @@ export default function Home() {
   const [email, setEmail] = useState<string>('')
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-
-  const goTo = () => {
-      router.push('/login')
-  }
+  const [warning, setWarning] = useState<string>('')
 
   const signup = async() => {
     let token 
+    if (!email || !username || !password) return setWarning('Please fill all the area')
 
     try{
         await fetch(
@@ -40,6 +38,7 @@ export default function Home() {
                     token = response.token;
                     console.log(token)
                     localStorage.setItem("authorization", "Bearer " + token);
+                    setWarning('')
                     router.push('/posts')
                 })
 
@@ -68,7 +67,7 @@ export default function Home() {
               <Input placeholder='Name' className='border-solid border-gray-500 rounded bg-zinc-900' onChange={(e) => setUsername(e.target.value)}/>
             </div>
             <div>
-              <Input placeholder='Password' className='border-solid border-gray-500 rounded bg-zinc-900' onChange={(e) => setPassword(e.target.value)}/>
+              <Input type='password' placeholder='Password' className='border-solid border-gray-500 rounded bg-zinc-900' onChange={(e) => setPassword(e.target.value)}/>
             </div>
           </div>
 
@@ -76,12 +75,15 @@ export default function Home() {
             <Button className="bg-blue-800 text-white w-[100%] rounded" onClick={() => signup()}>
               Sign up
             </Button>
+            <div className='flex items-center justfiy-center text-red-500 p-4' style={{justifyContent: 'center'}}>
+              {warning}
+            </div>
           </div>
         </div>
       </div>
       <div className='flex justify-center'>
         Have a account?  
-        <button className='text-blue-700 underline' onClick={goTo}>Log in</button>
+        <button className='text-blue-700 underline' onClick={() => router.push('/login')}>Log in</button>
       </div>
     </div>
 
