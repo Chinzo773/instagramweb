@@ -52,6 +52,7 @@ const Page = () => {
   const router = useRouter()
 
   const [posts, setPosts] = useState<postType>([]);
+  const [likeState, setLikeState] = useState<Boolean>(false)
 
   const getPosts = async () => {
     const fetchToken = localStorage.getItem("authorization")
@@ -75,7 +76,7 @@ const Page = () => {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [likeState]);
 
   return (
         <div className="flex flex-col h-[200vh] items-center relative">
@@ -102,7 +103,7 @@ const Page = () => {
                   <div className="flex w-full justify-between ">
                     <div className="flex space-x-1">
                       <div className="flex gap-x-1">
-                        <LikeFunction postId={post._id} likes={post.likes}/>
+                        <LikeFunction postId={post._id} likes={post.likes} setLikeState={setLikeState}/>
                         <LikeInfo count = {post.likes.length} likes = {post.likes}/>
                                 
                       </div>

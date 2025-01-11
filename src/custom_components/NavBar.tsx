@@ -17,7 +17,7 @@ const NavBar = () => {
     const decoded: jwtType = jwtDecode<jwtType>(fetchToken|| '');
     
     return(
-        <div className="fixed bottom-0 left-0 z-50 w-full h-12 bg-black border-t border-gray-500 p-3 dark:bg-gray-700 dark:border-gray-600">
+        <div className="fixed bottom-0 left-0 z-50 w-full h-12 bg-black border-t border-gray-500 p-3 px-10  dark:bg-gray-700 dark:border-gray-600">
             <div className="flex justify-between items-center w-full">
             <House onClick={() => router.push('/posts')}/>
             <PostCreate/>

@@ -34,11 +34,11 @@ const ProfilePosts = ({user} : {user:userType}) => {
                 <Grid2x2/>
             </div>
 
-            <div className='flex flex-wrap p-[1px]' style={{display:'flex' ,gap: '1px', width: '100vw', borderBottomColor: 'gray', borderStyle: 'thick', flexWrap: 'wrap'}}>
+            <div className='flex flex-wrap p-[1px]' style={{display:'flex' ,gap: '1px', width: '100%', borderBottomColor: 'gray', borderStyle: 'thick', flexWrap: 'wrap'}}>
                 {user.posts?.map((post) => {
                     return(
                         <div key={post._id} style={{width: '33%'}}>
-                            <img src={post.postImg} style={{width: '100%', height: '100%'}}/>
+                            <img src={post.postImg} style={{width: '100%', height: '100%', objectFit: 'cover'}}/>
                         </div>
                     )
                 })}

@@ -44,7 +44,7 @@ const Page = ({ params }: { params: Promise<{ postId: string }> }) => {
         posts: []
       });
     const {userId} = useParams()
-
+    
     const getUser = async() => {
         const fetchToken = localStorage.getItem("authorization")
 
@@ -74,15 +74,18 @@ const Page = ({ params }: { params: Promise<{ postId: string }> }) => {
 
 
     return(
-        <div>
-            <div>
-                <ProfileHeader user={user}/>
-            </div>
-            <div>
-                <ProfilePosts user={user}/>
-            </div>
-            <NavBar/>
+        <div className='flex justify-center'>
+            <div className='w-[600px]'>
+                <div>                    
+                    <ProfileHeader user={user}/>
+                </div>
+                <div>
+                    <ProfilePosts user={user}/>
+                </div>
+                <NavBar/>
+            </div> 
         </div>
+
     )
 }
 

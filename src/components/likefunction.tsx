@@ -1,7 +1,7 @@
 'use client'
 
 import { Heart } from 'lucide-react';
-import {  useState } from 'react';
+import {  SetStateAction, useState } from 'react';
 import { jwtDecode } from "jwt-decode";
 import { Decipher } from 'crypto';
 
@@ -19,8 +19,7 @@ type jwtType = {
     _id: string;
   };
 
-const LikeFunction = ({postId, likes}: {postId: string, likes: likeTypes[]}) => {
-    const [likeState, setLikeState] = useState<Boolean>(false)
+const LikeFunction = ({postId, likes, setLikeState}: {postId: string, likes: likeTypes[], setLikeState: React.Dispatch<React.SetStateAction<Boolean>>}) => {
 
     const fetchToken = localStorage.getItem("authorization")
 
@@ -31,6 +30,7 @@ const LikeFunction = ({postId, likes}: {postId: string, likes: likeTypes[]}) => 
 
     const likeFunc = async () => {
         try{
+            setLikeState(true)
             const jsonData = await fetch(
                 `https://instagram-kaih.onrender.com/like`,{
                     method: 'POST',
@@ -45,15 +45,17 @@ const LikeFunction = ({postId, likes}: {postId: string, likes: likeTypes[]}) => 
                 }
                 )
             const response = await jsonData.json()
+            setLikeState(false)
         }catch(err){
             console.log(err)
+            setLikeState(false)
         }
         console.log(likes)
     };
 
     return(
         <div>
-            <Heart className='after:bg-red-500' 
+            <Heart 
                 onClick={() => likeFunc()}
                 color={isLiked ? 'red': 'white'}
                 fill={isLiked ? 'red' :'none'}

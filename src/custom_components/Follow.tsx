@@ -35,7 +35,7 @@ const Follow = ({followId}: {followId: string}) => {
 
     return(
         <div>
-            <button onClick={() => follow()}>Follow</button>
+            <button className="border-s-gray-500 border-2 border-gray-500 p-2 rounded" onClick={() => follow()}>Follow</button>
         </div>
     )
 }
